@@ -4,16 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Webpack Starter Kit</title>
+      <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+    <title>IMG search</title>
 
     <!-- Don't forget to delete this style tag. -->
     
   </head>
 
   <body>
-    <form class="js-search-form">
-      <input class="input-value" type="text" name="query" />
+    <form class="search-form" id="search-form">
+      <input type="text" class="input-value" name="query" autocomplete="off" placeholder="Search images..." />
+      <button type="submit" class="search-btn">Search</button>
     </form>
-    <ul class="list-img"></ul>
+    <ul class="gallery"></ul>
+    <button type="button" class="btn-more is-hidden" data-action="load-more">Показать еше</button>
   </body>
 </html>

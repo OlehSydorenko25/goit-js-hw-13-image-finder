@@ -1,6 +1,25 @@
 {{#each this}}
-{{!-- <li class="img">{{largeImageURL}}</li> --}}
-<li>
-    <img src={{largeImageURL}} alt="" class="item-img">
+<li class="title-img">
+    <img src={{webformatURL}} data-source={{largeImageURL}} alt="" class="item-img">
+    <ul class="elements-info">
+        <li class="el-info stats">
+            <p class="stats-item">
+                <i class="material-icons">thumb_up</i>
+                {{likes}}
+            </p>
+            <p class="stats-item">
+                <i class="material-icons">visibility</i>
+                {{views}}
+            </p>
+            <p class="stats-item">
+                <i class="material-icons">comment</i>
+                {{comments}}
+            </p>
+            <p class="stats-item">
+                <i class="material-icons">cloud_download</i>
+                {{downloads}}
+            </p>
+        </li>
+    </ul>
 </li>
 {{/each}}

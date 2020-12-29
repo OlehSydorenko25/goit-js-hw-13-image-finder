@@ -1,18 +1,57 @@
 import './styles.css';
 import murkupImg from './templates/img.hbs'
 import searchImg from './js/fetchImg'
+import * as basicLightbox from 'basiclightbox'
 
 
 
-const mUpRef = document.querySelector('.list-img');
-const sarchWord = 'смартфон';
-const sarchPage = 3;
-const key = '19673147-430400f08d3bcfd22f58b851f'
+const ref = {
+    searchBnt: document.querySelector('.search-btn'),
+    searchForm: document.querySelector('.search-form'),
+    searchContainer: document.querySelector('.gallery'),
+    loadMoreBtn: document.querySelector('.btn-more'),
+    selectedPicture: document.querySelector('.title-img'),
 
+}
+let searchPage = 1;
+let inputValue = '';
 
-searchImg(sarchWord, sarchPage, key).then((data) => {
-    const arrdata = data.hits;
-    const markup = murkupImg(arrdata)
-    mUpRef.insertAdjacentHTML('beforeend', markup)
+ref.loadMoreBtn.addEventListener('click', () => {
+    fetchImg(inputValue)
 })
+
+ref.searchForm.addEventListener('submit', evt => {
+    evt.preventDefault()
+
+    searchPage = 1;
+
+    const form = evt.currentTarget
+    inputValue = form.elements.query.value
+    ref.searchContainer.innerHTML = ''
+    if (!inputValue) {
+        return
+    }
+       
+    fetchImg(inputValue)
+
+     window.scrollTo({
+        top: 10000,
+        behavior: 'smooth'
+    });
+})
+
+function fetchImg(inputValue) {
+    searchImg(inputValue, searchPage).then((arrData) => markupImgDo(arrData)).catch(err => console.log(err))
+    ref.loadMoreBtn.classList.remove('is-hidden')
+
+     
+}
+
+function markupImgDo (arrData) {
+    const markup = murkupImg(arrData)
+    searchPage += 1
+    ref.searchContainer.insertAdjacentHTML('beforeend', markup)
+    
+     
+}
 

@@ -27,12 +27,42 @@ ul {
   padding-left: 0;
 }
 
-.list-img {
+.btn-more.is-hidden {
+  display: none;
+}
+
+.gallery {
   display: flex;
   flex-wrap: wrap;
 }
 
 .item-img {
   border-radius: 5px;
-  width: 400px;
+  width: 370px;
+}
+
+.elements-info {
+  width: 370px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.el-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.title-img {
+  border-radius: 2px;
+  margin: 10px;
+}
+
+.stats-item {
+  display: flex;
+  margin-right: 20px;
+}
+
+.material-icons {
+  margin-right: 6px;
 }
