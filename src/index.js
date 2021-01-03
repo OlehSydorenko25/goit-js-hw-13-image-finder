@@ -3,14 +3,11 @@ import murkupImg from './templates/img.hbs'
 import searchImg from './js/fetchImg'
 import * as basicLightbox from 'basiclightbox'
 
-
-
 const ref = {
     searchBnt: document.querySelector('.search-btn'),
     searchForm: document.querySelector('.search-form'),
     searchContainer: document.querySelector('.gallery'),
     loadMoreBtn: document.querySelector('.btn-more'),
-    selectedPicture: document.querySelector('.title-img'),
 
 }
 let searchPage = 1;
@@ -34,17 +31,17 @@ ref.searchForm.addEventListener('submit', evt => {
        
     fetchImg(inputValue)
 
-     window.scrollTo({
-        top: 10000,
-        behavior: 'smooth'
-    });
 })
 
 function fetchImg(inputValue) {
     searchImg(inputValue, searchPage).then((arrData) => markupImgDo(arrData)).catch(err => console.log(err))
     ref.loadMoreBtn.classList.remove('is-hidden')
 
-     
+    ref.searchContainer.addEventListener('click', (evt) => {
+       
+        const valueClick = evt.target.dataset.source
+        const instance = basicLightbox.create(`<img src=${valueClick}  alt="">`).show()
+   })
 }
 
 function markupImgDo (arrData) {
@@ -52,6 +49,12 @@ function markupImgDo (arrData) {
     searchPage += 1
     ref.searchContainer.insertAdjacentHTML('beforeend', markup)
     
-     
+     window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth'
+    });
 }
+
+
+
 
