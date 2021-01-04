@@ -1,6 +1,6 @@
 import './styles.css';
 import murkupImg from './templates/img.hbs'
-import searchImg from './js/fetchImg'
+import searchImg from './js/apiService'
 import * as basicLightbox from 'basiclightbox'
 
 const ref = {
@@ -34,14 +34,10 @@ ref.searchForm.addEventListener('submit', evt => {
 })
 
 function fetchImg(inputValue) {
-    searchImg(inputValue, searchPage).then((arrData) => markupImgDo(arrData)).catch(err => console.log(err))
+    searchImg(inputValue, searchPage).then((arrData) => markupImgDo(arrData)).catch(err => {
+        console.log(err);
+    })
     ref.loadMoreBtn.classList.remove('is-hidden')
-
-    ref.searchContainer.addEventListener('click', (evt) => {
-       
-        const valueClick = evt.target.dataset.source
-        const instance = basicLightbox.create(`<img src=${valueClick}  alt="">`).show()
-   })
 }
 
 function markupImgDo (arrData) {
@@ -54,6 +50,15 @@ function markupImgDo (arrData) {
         behavior: 'smooth'
     });
 }
+
+ref.searchContainer.addEventListener('click', (evt) => {
+    if (evt.target.nodeName !== 'IMG') {
+        return
+    }
+       
+        const valueClick = evt.target.dataset.source
+        const instance = basicLightbox.create(`<img src=${valueClick}  alt="">`).show()
+   })
 
 
 

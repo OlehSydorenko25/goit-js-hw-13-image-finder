@@ -38,11 +38,11 @@ ul {
 
 .item-img {
   border-radius: 5px;
-  width: 370px;
+  width: 350px;
 }
 
 .elements-info {
-  width: 370px;
+  width: 350px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -60,11 +60,11 @@ ul {
 
 .stats-item {
   display: flex;
-  margin-right: 20px;
+  margin: 7px;
 }
 
 .material-icons {
-  margin-right: 6px;
+  margin-right: 4px;
 }
 
 .basicLightbox {
