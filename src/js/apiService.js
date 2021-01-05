@@ -1,3 +1,5 @@
+
+
 const key = '19673147-430400f08d3bcfd22f58b851f'
 
 export default function searchImg(searchWord, searchPage) {

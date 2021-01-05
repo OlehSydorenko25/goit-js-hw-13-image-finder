@@ -2,6 +2,11 @@ import './styles.css';
 import murkupImg from './templates/img.hbs'
 import searchImg from './js/apiService'
 import * as basicLightbox from 'basiclightbox'
+import { alert, defaultModules, error } from '@pnotify/core/dist/PNotify';
+import * as PNotifyMobile from '@pnotify/mobile';
+defaultModules.set(PNotifyMobile, {});
+import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/PNotify.css'
 
 const ref = {
     searchBnt: document.querySelector('.search-btn'),
@@ -34,10 +39,23 @@ ref.searchForm.addEventListener('submit', evt => {
 })
 
 function fetchImg(inputValue) {
-    searchImg(inputValue, searchPage).then((arrData) => markupImgDo(arrData)).catch(err => {
+    searchImg(inputValue, searchPage).then((arrData) => {
+        ref.loadMoreBtn.classList.add('is-hidden')
+        markupImgDo(arrData)
+        const lengthData = arrData.length;
+
+        if (lengthData === 0) {
+            alert('Such a image has not been found');
+            return
+        } else if (lengthData < 12) {
+            return
+        }
+
+        ref.loadMoreBtn.classList.remove('is-hidden')
+        
+    }).catch(err => {
         console.log(err);
     })
-    ref.loadMoreBtn.classList.remove('is-hidden')
 }
 
 function markupImgDo (arrData) {
@@ -55,7 +73,6 @@ ref.searchContainer.addEventListener('click', (evt) => {
     if (evt.target.nodeName !== 'IMG') {
         return
     }
-       
         const valueClick = evt.target.dataset.source
         const instance = basicLightbox.create(`<img src=${valueClick}  alt="">`).show()
    })
